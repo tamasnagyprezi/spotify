@@ -34,7 +34,7 @@ case class Segment(start: Double,
                    loudness_start: Double,
                    loudness_max_time: Double,
                    loudness_max: Double,
-                   loudness_end: Option[Int],
+                   loudness_end: Option[Double],
                    pitches: List[Double],
                    timbre: List[Double])
     extends TrackDuration
