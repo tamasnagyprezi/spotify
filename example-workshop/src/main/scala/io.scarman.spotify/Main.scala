@@ -22,5 +22,10 @@ class ArtistTest extends WithSpotify {
     val oneWithYou = Track("3eA6NakkA6fFaMTw1sTYZ5")
     println(await(oneWithYou.getAudioAnalysis()))
     println(await(oneWithYou.getAudioFeatures()))
+
+    val apacukaFriday = Playlist("3YfIjWjxZbjxS2NiOOkpve")
+    val list = await(apacukaFriday())
+    println(list.name)
+    list.tracks.items.map(t => (t.track.name, t.track.popularity)).foreach(println)
   }
 }
