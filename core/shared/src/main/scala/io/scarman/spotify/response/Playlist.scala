@@ -1,14 +1,17 @@
 package io.scarman.spotify.response
 
 case class Playlist(collaborative: Boolean,
-                    external_urls: List[ExternalUrl],
+                    description: String,
+                    external_urls: ExternalUrl,
+                    followers: Followers,
                     href: String,
                     id: String,
                     images: List[Image],
                     name: String,
-                    owner: User,
+                    owner: UserRef,
+                    primary_color: Option[String],
                     public: Option[Boolean],
                     snapshot_id: String,
-                    tracks: List[Track],
+                    tracks: PlaylistTracks,
                     `type`: String,
                     uri: String)

@@ -4,6 +4,7 @@ import com.softwaremill.sttp._
 import io.circe._
 import io.circe.generic.semiauto._
 import io.scarman.spotify.http.{DownloadResult, DownloadResults}
+import io.scarman.spotify.response.PlaylistTracks
 import io.scarman.spotify.{response => r}
 
 package object request {
@@ -19,6 +20,7 @@ package object request {
   val AB       = "albums"
   val AR       = "artists"
   val TR       = "tracks"
+  val PL       = "playlists"
   val AF       = "audio-features"
   val AA       = "audio-analysis"
 
@@ -51,6 +53,9 @@ package object request {
   implicit val ars: Decoder[r.Artists]       = deriveDecoder
   implicit val tld: Decoder[r.TrackLink]     = deriveDecoder
   implicit val sadd: Decoder[r.SimpleAlbum]  = deriveDecoder
+  implicit val usr: Decoder[r.UserRef]       = deriveDecoder
+  implicit val plt: Decoder[r.PlaylistTrack] = deriveDecoder
+  implicit val plts: Decoder[r.PlaylistTracks] = deriveDecoder
   implicit val plrd: Decoder[r.Playlist]     = deriveDecoder
   implicit val urd: Decoder[r.User]          = deriveDecoder
   implicit val srd: Decoder[r.SearchResults] = deriveDecoder
