@@ -86,3 +86,18 @@ lazy val example = project
   )
   .enablePlugins(ScalaJSPlugin)
   .dependsOn(core.js)
+
+lazy val exampleWorkshop = project
+  .in(file("example-workshop"))
+  .settings(common)
+  .settings(
+    name := "example-workshop",
+    scalaVersion := "2.13.0",
+    mainClass in Compile := Some("io.scarman.spotify.Main"),
+    resolvers += Resolver.jcenterRepo,
+    libraryDependencies ++= Seq(
+      "com.lihaoyi" %%% "scalatags" % "0.7.0"
+    ),
+    test in Test := {},
+  )
+  .dependsOn(core.jvm)
