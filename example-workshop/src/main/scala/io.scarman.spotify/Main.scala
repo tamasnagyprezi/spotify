@@ -16,8 +16,8 @@ object Main extends App {
 
 class ArtistTest extends WithSpotify {
   def run(): Unit = {
-    val artist = Artist("2ikrIhCYSKmzCgWb9EM3aT")
-    await(artist.topTracks()()).tracks.map(_.name).foreach(println)
+    val barthezz = Artist("2ikrIhCYSKmzCgWb9EM3aT")
+    await(barthezz.topTracks()()).tracks.map(_.name).foreach(println)
 
     val oneWithYou = Track("3eA6NakkA6fFaMTw1sTYZ5")
     println(await(oneWithYou.getAudioAnalysis()))
