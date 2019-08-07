@@ -42,7 +42,9 @@ private[spotify] abstract class HttpRequest[R](implicit auth: Authorization,
       resp.map { r =>
         toJson(r) match {
           case Right(v) => v
-          case Left(e)  => throw new Exception(s"${e.error.message} - ${authReq.uri}\n")
+          case Left(e)  =>
+            Console.err.println(r)
+            throw new Exception(s"${e.error.message} - ${authReq.uri}\n")
         }
       }
     }
