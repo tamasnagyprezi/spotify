@@ -7,11 +7,11 @@ import io.scarman.spotify.Spotify
 import io.scarman.spotify.auth._
 import io.scarman.spotify.http.Authorization
 
-import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.FiniteDuration
 import scala.concurrent.{Await, Future}
 
 trait WithSpotify {
+  implicit val ec = scala.concurrent.ExecutionContext.Implicits.global
   implicit val backend = AsyncHttpClientFutureBackend()
 
   implicit val creds =  ClientCredentials(Credentials.appId, Credentials.appSecret)
