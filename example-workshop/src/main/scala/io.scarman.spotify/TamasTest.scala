@@ -19,16 +19,6 @@ class TamasTest extends WithSpotify {
 
     val berci = Playlist("5cNp1xS22nNOwVtLMIm8og")
     println(await(berci()))
-
-    val relatedToMonday = getRelatedArtists(Playlist("1M0w0CabcTplJJGyfbDPKG"))
-    println(relatedToMonday)
-
-    val friday = Playlist("3YfIjWjxZbjxS2NiOOkpve")
-    val from   = await(friday())
-    from.tracks.items.collect {
-      case t if relatedToMonday.intersect(t.track.artists.map(_.id).toSet).nonEmpty =>
-        println(t.track.name)
-    }
   }
 
   def getRelatedArtists(playlist: request.Playlist): Set[String] = {
@@ -39,7 +29,14 @@ class TamasTest extends WithSpotify {
   }
 
   def run(): Unit = {
-    val apacukaFriday = Playlist("3YfIjWjxZbjxS2NiOOkpve")
-    val list          = await(apacukaFriday())
+    val relatedToMonday = getRelatedArtists(Playlist("1M0w0CabcTplJJGyfbDPKG"))
+    println(relatedToMonday)
+
+    val friday = Playlist("3YfIjWjxZbjxS2NiOOkpve")
+    val from   = await(friday())
+    from.tracks.items.collect {
+      case t if relatedToMonday.intersect(t.track.artists.map(_.id).toSet).nonEmpty =>
+        println(t.track.name)
+    }
   }
 }
