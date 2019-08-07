@@ -6,7 +6,7 @@ import io.scarman.spotify.request.ImageDownload
 
 import scala.concurrent.{ExecutionContext, Future}
 
-case class Image(height: Int, url: String, width: Int) {
+case class Image(height: Option[Int], url: String, width: Option[Int]) {
 
   def download(location: String)(implicit backend: SttpBackend[Future, Nothing], ec: ExecutionContext): Future[DownloadResults] = {
     download(location, None)
