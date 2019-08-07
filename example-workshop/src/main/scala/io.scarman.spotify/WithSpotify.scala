@@ -17,5 +17,5 @@ trait WithSpotify {
   implicit val creds =  ClientCredentials(Credentials.appId, Credentials.appSecret)
   implicit val spotify = Spotify(creds)
   protected def await[A](future: Future[A]): A =
-    Await.result(future, FiniteDuration(5, TimeUnit.SECONDS))
+    Await.result(future, FiniteDuration(15, TimeUnit.SECONDS))
 }
