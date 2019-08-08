@@ -2,3 +2,5 @@
 target
 *.class
 *.log
+node_modules
+
