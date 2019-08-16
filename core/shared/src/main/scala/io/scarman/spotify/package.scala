@@ -23,6 +23,7 @@ package object spotify {
   val Track         = request.Track
   val Tracks        = request.Tracks
   val Playlist      = request.Playlist
+  val PlaylistAddTrack      = request.PlaylistAddTrack
   val AlbumTypes    = request.AlbumTypes
   val appears_on    = request.appears_on
   val compilation   = request.compilation

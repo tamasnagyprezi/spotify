@@ -28,7 +28,11 @@ class TamasTest extends WithSpotify {
     await(Future.sequence(getRelated)).flatten.toSet
   }
 
-  def run(): Unit = {
+  def shuffle(playlist: request.PlaylistAddTrack): Unit = {
+    await(playlist())
+  }
+
+  def run0(): Unit = {
     val relatedToMonday = getRelatedArtists(Playlist("1M0w0CabcTplJJGyfbDPKG"))
     println(relatedToMonday)
 
@@ -38,5 +42,10 @@ class TamasTest extends WithSpotify {
       case t if relatedToMonday.intersect(t.track.artists.map(_.id).toSet).nonEmpty =>
         println(t.track.name)
     }
+  }
+
+  def run(): Unit = {
+    val thursday = Playlist("3CDyh6RFvALszUNUlbQh9D").addTrack(List("https://open.spotify.com/track/2AJmSDr26ZvsunbofYzVqG"))
+    println(await(thursday()))
   }
 }

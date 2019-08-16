@@ -16,4 +16,6 @@ import scala.concurrent.Future
 case class Playlist(id: String, market: String = "US")(implicit auth: Authorization, backend: SttpBackend[Future, Nothing])
     extends HttpRequest[r.Playlist] {
   lazy protected val reqUri = uri"$base$PL/$id".param("market", market)
+
+  def addTrack(trackIds: List[String]): PlaylistAddTrack = PlaylistAddTrack(id, trackIds)
 }

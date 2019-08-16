@@ -56,6 +56,7 @@ package object request {
   implicit val usr: Decoder[r.UserRef]       = deriveDecoder
   implicit val plt: Decoder[r.PlaylistTrack] = deriveDecoder
   implicit val plts: Decoder[r.PlaylistTracks] = deriveDecoder
+  implicit val plrds: Decoder[r.PlaylistSnapshotId]     = deriveDecoder
   implicit val plrd: Decoder[r.Playlist]     = deriveDecoder
   implicit val urd: Decoder[r.User]          = deriveDecoder
   implicit val srd: Decoder[r.SearchResults] = deriveDecoder
