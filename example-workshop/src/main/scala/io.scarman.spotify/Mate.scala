@@ -49,13 +49,15 @@ class Mate extends WithSpotify {
   }
 
   def run(): Unit = {
-    val babyLullaby = Playlist("37i9dQZF1DX8Sz1gsYZdwj")
+    val playlists = List(
+      Playlist("37i9dQZF1DX8Sz1gsYZdwj")
+    )
     val bestSongId = "2QEcIFrrwOyCHgV5UqyrGe"
 
     val futResult = for {
-      playlist <- babyLullaby()
-      _ = println(playlist.name)
-      tracks = playlist.tracks.items
+      playlists <- Future.sequence(playlists.map(_.apply()))
+      _ = println(playlists.map(_.name))
+      tracks = playlists.flatMap(_.tracks.items).distinctBy(_.track.id)
       tracksWithFeatures <- Future.sequence(tracks.map(_.getFeatures))
       bestSong = tracksWithFeatures.find(_.track.track.id == bestSongId).get
       ordering = orderingByTrackWithFeatures(bestSong)
