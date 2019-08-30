@@ -45,7 +45,8 @@ class TamasTest extends WithSpotify {
   }
 
   def run(): Unit = {
-    val thursday = Playlist("3CDyh6RFvALszUNUlbQh9D").addTrack(List("https://open.spotify.com/track/2AJmSDr26ZvsunbofYzVqG"))
-    println(await(thursday()))
+    val thursday = Playlist("3CDyh6RFvALszUNUlbQh9D")
+    val addEdge = thursday.addTrack(List("spotify:track:2AJmSDr26ZvsunbofYzVqG"))
+    println(await(addEdge()))
   }
 }
