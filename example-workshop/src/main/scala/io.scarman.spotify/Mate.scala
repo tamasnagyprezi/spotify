@@ -1,5 +1,6 @@
 package io.scarman.spotify
 
+import io.scarman.spotify.request.Playlist
 import io.scarman.spotify.response.PlaylistTrack
 
 import scala.concurrent.Future
@@ -49,10 +50,12 @@ class Mate extends WithSpotify {
   }
 
   def run(): Unit = {
-    val playlists = List(
+    val playlists: Seq[Playlist] = List(
       Playlist("37i9dQZF1DX8Sz1gsYZdwj")
     )
     val bestSongId = "2QEcIFrrwOyCHgV5UqyrGe"
+
+    val targetPlaylist: Playlist = Playlist("4MBTtt7gaLiPlSkoXetUsh")
 
     val futResult = for {
       playlists <- Future.sequence(playlists.map(_.apply()))
@@ -61,10 +64,13 @@ class Mate extends WithSpotify {
       tracksWithFeatures <- Future.sequence(tracks.map(_.getFeatures))
       bestSong = tracksWithFeatures.find(_.track.track.id == bestSongId).get
       ordering = orderingByTrackWithFeatures(bestSong)
-    } yield tracksWithFeatures.sorted(ordering)
+      sortedResult = tracksWithFeatures.sorted(ordering)
+      _ = sortedResult.foreach(println)
+      _ <- targetPlaylist.removeTrack(tracks.map(_.track.uri).toList).apply()
+      addTopTracks <- targetPlaylist.addTrack(sortedResult.take(4).map(_.track.track.uri).toList).apply()
+    } yield addTopTracks
 
     await(futResult)
-      .foreach(println)
   }
 
 }
