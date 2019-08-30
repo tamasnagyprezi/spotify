@@ -19,7 +19,7 @@ case class UserCredentials(appId: String, appSecret: String, userAuth: Option[Us
 
   override def explainForbidden(): String = {
     val url = AuthorizationCode(appId, Scopes.All, userAuth.map(_.redirectUri).getOrElse("<redirectUrl>")).authUrl()
-    s"Whitelist the redirect URI through your dashboard: https://developer.spotify.com/dashboard/applications\n Then visit this URL to update `code` in Credentials.scala:\n $url"
+    s"Whitelist the redirect URI through your dashboard: https://developer.spotify.com/dashboard/applications\n Then visit this URL to update the token in Credentials.scala:\n $url"
   }
 
   private val baseBody = userAuth match {
