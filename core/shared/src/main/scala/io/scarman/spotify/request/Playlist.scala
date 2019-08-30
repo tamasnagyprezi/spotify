@@ -18,4 +18,6 @@ case class Playlist(id: String, market: String = "US")(implicit auth: Authorizat
   lazy protected val reqUri = uri"$base$PL/$id".param("market", market)
 
   def addTrack(trackIds: List[String]): PlaylistAddTrack = PlaylistAddTrack(id, trackIds)
+
+  def removeTrack(trackIds: List[String]): PlaylistRemoveTrack = PlaylistRemoveTrack(id, trackIds)
 }
