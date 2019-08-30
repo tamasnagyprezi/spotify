@@ -12,7 +12,7 @@ trait WithSpotify {
   implicit val ec = ExecutionContext.fromExecutor(Executors.newFixedThreadPool(8))
   implicit val backend = AsyncHttpClientFutureBackend()
 
-  implicit val creds = ClientCredentials(Credentials.appId, Credentials.appSecret)
+  implicit val creds = UserCredentials(Credentials.appId, Credentials.appSecret, Some(Credentials.userAuth))
   implicit val spotify = Spotify(creds)
 
   protected def await[A](future: Future[A]): A =
