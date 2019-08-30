@@ -14,4 +14,5 @@ trait Authorization {
 
   def isExpired: Future[Boolean]
 
+  def explainForbidden(): String = ""
 }

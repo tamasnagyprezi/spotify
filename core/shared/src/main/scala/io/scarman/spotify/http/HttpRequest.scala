@@ -44,6 +44,8 @@ private[spotify] abstract class HttpRequest[R](implicit auth: Authorization,
           case Right(v) => v
           case Left(e)  =>
             Console.err.println(r)
+            if (Set(401, 402, 403).contains(e.error.status))
+              Console.err.println(auth.explainForbidden())
             throw new Exception(s"${e.error.message} - ${authReq.uri}\n")
         }
       }
