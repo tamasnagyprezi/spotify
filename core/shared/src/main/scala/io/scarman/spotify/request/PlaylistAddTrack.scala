@@ -1,7 +1,8 @@
 package io.scarman.spotify.request
 
 import com.softwaremill.sttp._
-import io.scarman.spotify.http.{Authorization, HttpRequest}
+import com.softwaremill.sttp.circe.asJson
+import io.scarman.spotify.http.{Authorization, HttpRequest, Req}
 import io.scarman.spotify.{response => r}
 
 import scala.concurrent.Future
@@ -16,8 +17,9 @@ import scala.concurrent.Future
   */
 case class PlaylistAddTrack(playlist: String, trackIds: List[String], market: String = "US")(implicit auth: Authorization, backend: SttpBackend[Future, Nothing])
     extends HttpRequest[r.PlaylistTracks] {
-  lazy protected val reqUri =
+  override lazy protected val reqUri =
     uri"$base$PL/$playlist/tracks"
     .param("market", market)
     .param("uris", trackIds.mkString(","))
+  override protected val request: Req[r.PlaylistTracks] = sttp.post(reqUri).response(asJson[r.PlaylistTracks])
 }
