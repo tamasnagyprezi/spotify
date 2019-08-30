@@ -16,10 +16,10 @@ import scala.concurrent.Future
   * @param market
   */
 case class PlaylistAddTrack(playlist: String, trackIds: List[String], market: String = "US")(implicit auth: Authorization, backend: SttpBackend[Future, Nothing])
-    extends HttpRequest[r.PlaylistTracks] {
+    extends HttpRequest[r.PlaylistSnapshotId] {
   override lazy protected val reqUri =
     uri"$base$PL/$playlist/tracks"
     .param("market", market)
     .param("uris", trackIds.mkString(","))
-  override protected val request: Req[r.PlaylistTracks] = sttp.post(reqUri).response(asJson[r.PlaylistTracks])
+  override protected val request: Req[r.PlaylistSnapshotId] = sttp.post(reqUri).response(asJson[r.PlaylistSnapshotId])
 }
